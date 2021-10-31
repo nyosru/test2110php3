@@ -57,15 +57,64 @@ class User
         return $user_id;
     }
 
-    // TEST
 
-    public static function owner_info()
+
+    public static function user_update($data)
     {
-        // your code here ...
+
+        // сначала выявим ошибки
+        if (
+            empty($data['id']) 
+            || empty($data['first_name']) 
+            || empty($data['last_name']) 
+            || empty($data['phone']) 
+            || !isset($data['middle_name']) 
+            || !isset($data['email']) 
+            ) {
+            // можно запускать исключение и его отлавливать/отслеживать там где мы вызываем этот метод
+            //  throw new Exception("Error Processing Request", 1);                        
+            return ['status' => 'error', 'error_text' => 'не все поля заполнены'];
+        }
+
+        // если ошибок нет то уже обрабатываем велидируем и отправляем запрос
+
+        DB::add_pole_to_update( 'phone', $data['phone'] );
+        if ( empty(DB::$updateVar[':phone']) ) return ['status' => 'error', 'error_text' => 'телефон указан не верно ( пример +7(999)888-77-66 )'];
+
+        DB::add_pole_to_update('first_name', $data['first_name']);
+        DB::add_pole_to_update('last_name', $data['last_name']);
+        // могут быть нулём
+        DB::add_pole_to_update('middle_name', $data['middle_name'] ?? null );
+        DB::add_pole_to_update('email', $data['email'] ?? null );
+
+        $result = DB::query_update( 'user_id', $data['id'] );
+
+        // output
+        // return $user_id;
+        return [
+            'status' => 'ok',
+            'result_sql' => $result,
+            // 'sql_query' => $sql_query,
+            // 'sql_data' => $inSqlVars
+        ];
     }
 
-    public static function owner_update($data = [])
+    // TEST
+
+    public static function owner_info($requery)
     {
         // your code here ...
+        // добавил входящие параметры .. так как без них всегда будет пустой ответ (массив)
+        return self::user_info($requery);
+    }
+
+    // если дата пустая то на самом старте пусть будет ошибка, которую можно отловить try{} catch{} выше
+    // public static function owner_update($data = [])
+    public static function owner_update($data)
+    {
+        // your code here ...
+        $result = self::user_update($data);
+        return $result;
+        // return ['status' => 'ok'];
     }
 }

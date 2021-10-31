@@ -1,23 +1,21 @@
 <?php
 
-class Route
-{
+class Route {
 
     // VARS
 
     public static $path = '';
     public static $query = [];
+    public static $method = '';
 
     // GENERAL
 
-    public static function init()
-    {
+    public static function init() {
         self::info();
         self::route_common();
     }
 
-    private static function info()
-    {
+    private static function info() {
         // vars
         $url = $_SERVER['REQUEST_URI'];
         // formatting
@@ -34,13 +32,18 @@ class Route
                 self::$query[$key] = $value;
             }
         }
+
+        self::$method = $_SERVER['REQUEST_METHOD'];
+
     }
 
     // ROUTES
 
-    private static function route_common()
-    {
+    private static function route_common() {
+        
         if (self::$path == 'home') return controller_home();
         return '';
+
     }
+
 }

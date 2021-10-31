@@ -299,3 +299,105 @@ img {
 /* header */
 
 /* ... your code here ... */
+
+.containers-page h1 {
+  font-family: Euclid Circular A;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 44px;
+  line-height: 57px;
+  letter-spacing: 0.02em;
+  color: #0962e8;
+}
+
+.containers-page > div {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 5vh;
+}
+
+.containers-page .block-text,
+.containers-page .block-img {
+  margin-right: 1vw;
+}
+
+.containers-page .block-text {
+  width: 48%;
+  float: left;
+  font-size: 44px;
+}
+
+.containers-page .block-text button {
+  background: #0962e8;
+  border-radius: 10px;
+  padding: 15px 10px;
+
+  font-family: Euclid Circular A;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.03em;
+
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.containers-page .block-text .opis {
+  font-family: Euclid Circular A;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.01em;
+  font-feature-settings: "case" on, "zero" on;
+
+  color: #062b61;
+}
+
+.containers-page .block-img {
+  width: 48%;
+  float: left;
+}
+
+.containers-page .block-text .head {
+  /* title */
+
+  position: absolute;
+  width: 470px;
+  height: 114px;
+  left: calc(50% - 470px / 2 - 245px);
+  top: 155px;
+
+  /* H1 */
+  font-family: Euclid Circular A;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 44px;
+  line-height: 57px;
+  letter-spacing: 0.02em;
+
+  color: #0962e8;
+}
+
+.containers-page a.btn-google,
+.containers-page a.btn-apple {
+  display: inline-block;
+  border-radius: 3px;
+  border: 1px solid #07152a;
+  height: 40px;
+  width: 125px;
+  background-position: center center;
+  background-size: cover;
+}
+
+.containers-page a.btn-google {
+  background-image: url("/images/btn-google.jpg");
+}
+.containers-page a.btn-apple {
+  background-image: url("/images/btn-apple.jpg");
+}

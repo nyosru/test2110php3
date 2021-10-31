@@ -75,3 +75,24 @@ function phone_formatting($phone)
     if (preg_match('~^[78][\d]{10}$~', $phone)) $phone = preg_replace('~^([78])([\d]{3})([\d]{3})([\d]{2})([\d]{2})$~', '+$1 ($2) $3-$4-$5', $phone);
     return $phone;
 }
+
+
+
+/**
+ * возвращаем или только цифры номера или false если номер не норм
+ * в начале "7" и 11 в длинну
+ */
+function flt_phone_number($str)
+{
+    $result = preg_replace("/[^,.0-9]/", '', $str);
+    return ($result{0} == 7 && strlen($result) == 11) ? $result : false;
+}
+
+/**
+ * возвращаем результат Апи
+ */
+function return_result_api($array)
+{
+    header('Content-type:application/json;charset=utf-8');
+    die(json_encode($array));
+}

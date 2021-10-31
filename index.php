@@ -21,6 +21,28 @@ Route::init();
 $g['path'] = Route::$path;
 $g['year'] = date('Y');
 
+// в PDO можно и нужно использовать защиту вставки непонятного через переменные, 
+// путём использования обработки переменных с помощью PDO (наприер id который проверяем цифра это или нет .. что излишне) это позволит 
+// не использовать явных доп проверок и ускорит процесс
+
+// API response 
+if ( Route::$method == 'GET') {
+    if (Route::$path == 'user.get') {
+        return_result_api(User::owner_info($_REQUEST));
+    }
+    // получаем уведомления ( возможен флаг show_unreaded = *** если есть то только непрочитанные )
+    elseif (Route::$path == 'notifications.get') {
+        return_result_api(Notification::get($_REQUEST['get_unread'] ?? ''));
+    }
+} else if ( Route::$method == 'POST') {
+    if (Route::$path == 'user.update') {
+        return_result_api(User::owner_update($_REQUEST));
+    }
+    elseif (Route::$path == 'notifications.read') {
+        return_result_api(Notification::set_readed());
+    }
+}
+
 // OUTPUT
 
 HTML::assign('global', $g);
